@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int day; 
+
+    cout << "Enter the day number (1-7): ";
+    cin >> day;
+
+    switch (day) {
+        case 1:
+            cout << "Monday:\n";
+            cout << "1. Information networks\n";
+            cout << "2. Information network architecture\n";
+            cout << "3. Higher mathematics\n";
+            cout << "4. Applied algorithms and data systems\n";
+            break;
+
+        case 2:
+            cout << "Tuesday:\n";
+            cout << "1. English\n";
+            cout << "2. C++\n";
+            cout << "3. C++\n";
+            break;
+
+        case 3:
+            cout << "Wednesday:\n";
+            cout << "1. Applied algorithms and data systems\n";
+            break;
+
+        case 4:
+            cout << "Thursday:\n";
+            cout << "1. Higher mathematics\n";
+            cout << "2. English\n";
+            break;
+
+        case 5:
+            cout << "Friday:\n";
+            cout << "1. Information networks\n";
+            cout << "2. Information network architecture\n";
+            cout << "3. Convergent network structure\n";
+            break;
+
+        case 6:
+            cout << "Saturday:\n";
+            cout << "No classes today! Rest day.\n";
+            break;
+
+        case 7:
+            cout << "Sunday:\n";
+            cout << "No classes today! Rest day.\n";
+            break;
+
+        default:
+            cout << "Invalid day number! Please enter a number from 1 to 7.\n";
+            break;
+    }
+
+    return 0;
+}
