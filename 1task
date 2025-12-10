@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cout << "Enter a three-digit number: ";
+    cin >> N;
+
+    int a = N / 100;        
+    int b = (N / 10) % 10;  
+    int c = N % 10;         
+
+    int sum = 0; 
+
+    if (a > 5) sum = sum + a;
+    if (b > 5) sum = sum + b;
+    if (c > 5) sum = sum + c;
+
+    cout << "Sum of digits greater than 5 = " << sum << endl;
+
+    return 0;
+}
+
