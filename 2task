@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    double x, y;
+
+    cout << "Enter x: ";
+    cin >> x;
+    cout << "Enter y: ";
+    cin >> y;
+
+    bool inLeftSquare = (x >= -1 && x <= 0 && y >= 0 && y <= 1);
+
+    bool inRightSquare = (x >= 0 && x <= 1 && y >= -1 && y <= 0);
+
+    if (inLeftSquare || inRightSquare) {
+        cout << "The point is inside the shaded area." << endl;
+    } else {
+        cout << "The point is outside the shaded area." << endl;
+    }
+
+    return 0;
+}
