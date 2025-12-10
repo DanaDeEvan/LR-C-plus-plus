@@ -1,0 +1,28 @@
+#include <cmath> 
+using namespace std;
+
+int main() {
+    double x, a, b, c, y;
+
+    cout << "Enter x: ";
+    cin >> x;
+    cout << "Enter a: ";
+    cin >> a;
+    cout << "Enter b: ";
+    cin >> b;
+    cout << "Enter c: ";
+    cin >> c;
+
+    if (b < 5) {
+        y = pow((4 - x), a * b);
+    } else if (b >= c) {
+        y = 0.25 + b * c;
+    } else {
+        cout << "Condition does not match any case." << endl;
+        return 0;
+    }
+
+    cout << "Result: Y = " << y << endl;
+
+    return 0;
+}
