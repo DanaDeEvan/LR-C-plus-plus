@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+
+using namespace std;
+int main() {
+    const int m = 4, n = 6;
+    int a[m][n];
+
+    srand(time(NULL));
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            a[i][j] = rand() % 20;
+            cout << setw(4) << a[i][j];
+        }
+        cout << endl;
+    }
+
+    for (int j = 0; j < n; j++) {
+        int sum = 0;
+        for (int i = 0; i < m; i++)
+            sum += a[i][j];
+
+        cout << "Sum of column " << j << ": " << sum << endl;
+    }
+
+    return 0;
+}
