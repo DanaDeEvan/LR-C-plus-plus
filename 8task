@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    int a, b;
+    const float epsilon = 0.000001;
+
+    cin >> a;
+    cin >> b;
+
+    float x = 1.0f / a;
+    float y = 1.0f / b;
+
+    if (fabs(x - y) <= epsilon) {
+        cout << "Results are equal (by 0.000001 epsilon)";
+    } else {
+        cout << "Results are not equal (by 0.000001 epsilon)";
+    }
+
+    return 0;
+}
