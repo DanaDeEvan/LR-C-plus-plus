@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+
+using namespace std;
+int main() {
+    const int m = 4, n = 3;
+    int a[m][n];
+
+    srand(time(NULL));
+
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++)
+            a[i][j] = rand() % 20;
+
+    for (int i = 0; i < m; i++) {
+        int count = 0;
+        for (int j = 0; j < n; j++) {
+            cout << setw(4) << a[i][j];
+            if (a[i][j] % 2 == 0)
+                count++;
+        }
+        cout << " | Even numbers in row " << i << ": " << count << endl;
+    }
+
+    return 0;
+}
