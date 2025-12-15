@@ -1,0 +1,39 @@
+#include <iostream>
+
+using namespace std;
+
+struct Date {
+    int hours;
+    int minutes;
+};
+
+int main() {
+    Date time;
+    int addMinutes;
+
+    cout << "Enter hours: ";
+    cin >> time.hours;
+
+    cout << "Enter minutes: ";
+    cin >> time.minutes;
+
+    cout << "Enter minutes to add: ";
+    cin >> addMinutes;
+
+    // Convert everything to minutes
+    int totalMinutes = time.hours * 60 + time.minutes + addMinutes;
+
+    // Normalize time
+    totalMinutes %= (24 * 60);
+
+    time.hours = totalMinutes / 60;
+    time.minutes = totalMinutes % 60;
+
+    cout << "Result time: ";
+    cout << time.hours << ":";
+    if (time.minutes < 10)
+        cout << "0";
+    cout << time.minutes << endl;
+
+    return 0;
+}
