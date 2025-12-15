@@ -1,0 +1,31 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+
+using namespace std;
+int main() {
+    const int n = 3;
+    int a[n][n];
+
+    srand(time(NULL));
+
+    int mainSum = 0, secondarySum = 0;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            a[i][j] = rand() % 10;
+            cout << setw(4) << a[i][j];
+            if (i == j)
+                mainSum += a[i][j];
+            if (i + j == n - 1)
+                secondarySum += a[i][j];
+        }
+        cout << endl;
+    }
+
+    cout << "Main diagonal sum: " << mainSum << endl;
+    cout << "Secondary diagonal sum: " << secondarySum << endl;
+
+    return 0;
+}
