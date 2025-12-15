@@ -1,0 +1,39 @@
+#include <iostream>
+
+using namespace std;
+
+struct Date {
+    int hours;
+    int minutes;
+};
+
+int main() {
+    Date start, end;
+
+    cout << "Enter start time (hours minutes): ";
+    cin >> start.hours >> start.minutes;
+
+    cout << "Enter end time (hours minutes): ";
+    cin >> end.hours >> end.minutes;
+
+    int startTotal = start.hours * 60 + start.minutes;
+    int endTotal = end.hours * 60 + end.minutes;
+
+    // If event ends next day
+    if (endTotal < startTotal) {
+        endTotal += 24 * 60;
+    }
+
+    int duration = endTotal - startTotal;
+
+    int resultHours = duration / 60;
+    int resultMinutes = duration % 60;
+
+    cout << "Event duration: ";
+    cout << resultHours << ":";
+    if (resultMinutes < 10)
+        cout << "0";
+    cout << resultMinutes << endl;
+
+    return 0;
+}
