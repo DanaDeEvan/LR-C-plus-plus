@@ -1,0 +1,31 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+
+using namespace std;
+int main() {
+    const int m = 4, n = 7;
+    int a[m][n];
+
+    srand(time(NULL));
+
+    int minVal, row = 0, col = 0;
+
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++) {
+            a[i][j] = rand() % 50 - 25;
+            cout << setw(4) << a[i][j];
+            if (i == 0 && j == 0 || a[i][j] < minVal) {
+                minVal = a[i][j];
+                row = i;
+                col = j;
+            }
+            if (j == n - 1) cout << endl;
+        }
+
+    cout << "Minimum value: " << minVal << endl;
+    cout << "Position: row " << row << ", column " << col << endl;
+
+    return 0;
+}
