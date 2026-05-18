@@ -1,0 +1,185 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class FlightBooking {
+public:
+    FlightBooking(int id, int capacity, int reserved);
+
+    FlightBooking();
+
+    void printStatus();
+
+    bool reserveSeats(int number_of_seats);
+
+    bool cancelReservations(int number_of_seats);
+
+    int getId();
+
+private:
+    int id;
+    int capacity;
+    int reserved;
+};
+
+FlightBooking::FlightBooking() {
+    id = 0;
+    capacity = 0;
+    reserved = 0;
+}
+
+FlightBooking::FlightBooking(int id, int capacity, int reserved) {
+    this->id = id;
+    this->capacity = capacity;
+
+    int maxReserved = capacity * 105 / 100;
+
+    if (reserved < 0)
+        this->reserved = 0;
+    else if (reserved > maxReserved)
+        this->reserved = maxReserved;
+    else
+        this->reserved = reserved;
+}
+
+int FlightBooking::getId() {
+    return id;
+}
+
+void FlightBooking::printStatus() {
+    int percentage = reserved * 100 / capacity;
+
+    cout << "Flight " << id << " : "
+         << reserved << "/" << capacity
+         << " (" << percentage << "%) seats reserved" << endl;
+}
+
+bool FlightBooking::reserveSeats(int number_of_seats) {
+    int maxReserved = capacity * 105 / 100;
+
+    if (reserved + number_of_seats > maxReserved)
+        return false;
+
+    reserved += number_of_seats;
+
+    return true;
+}
+
+bool FlightBooking::cancelReservations(int number_of_seats) {
+    if (reserved - number_of_seats < 0)
+        return false;
+
+    reserved -= number_of_seats;
+
+    return true;
+}
+
+int findFlight(FlightBooking bookings[], int id) {
+    for (int i = 0; i < 10; i++) {
+        if (bookings[i].getId() == id)
+            return i;
+    }
+
+    return -1;
+}
+
+void printFlights(FlightBooking bookings[]) {
+    bool empty = true;
+
+    for (int i = 0; i < 10; i++) {
+        if (bookings[i].getId() != 0) {
+            bookings[i].printStatus();
+            empty = false;
+        }
+    }
+
+    if (empty)
+        cout << "No flights in the system" << endl;
+}
+
+int main() {
+    FlightBooking bookings[10];
+
+    string command;
+
+    while (command != "quit") {
+        printFlights(bookings);
+
+        getline(cin, command);
+
+        if (command == "quit")
+            break;
+
+        string action;
+
+        size_t pos = command.find(' ');
+
+        action = command.substr(0, pos);
+
+        if (action == "create") {
+            int id, cap;
+
+            sscanf(command.c_str(), "create %d %d", &id, &cap);
+
+            if (findFlight(bookings, id) != -1) {
+                cout << "Cannot perform this operation" << endl;
+                continue;
+            }
+
+            bool created = false;
+
+            for (int i = 0; i < 10; i++) {
+                if (bookings[i].getId() == 0) {
+                    bookings[i] = FlightBooking(id, cap, 0);
+                    created = true;
+                    break;
+                }
+            }
+
+            if (!created)
+                cout << "Cannot perform this operation" << endl;
+        }
+
+        else if (action == "delete") {
+            int id;
+
+            sscanf(command.c_str(), "delete %d", &id);
+
+            int index = findFlight(bookings, id);
+
+            if (index == -1)
+                cout << "Cannot perform this operation: flight " << id << " not found" << endl;
+            else
+                bookings[index] = FlightBooking();
+        }
+
+        else if (action == "add") {
+            int id, seats;
+
+            sscanf(command.c_str(), "add %d %d", &id, &seats);
+
+            int index = findFlight(bookings, id);
+
+            if (index == -1)
+                cout << "Cannot perform this operation: flight " << id << " not found" << endl;
+            else if (!bookings[index].reserveSeats(seats))
+                cout << "Cannot perform this operation: capacity reached" << endl;
+        }
+
+        else if (action == "cancel") {
+            int id, seats;
+
+            sscanf(command.c_str(), "cancel %d %d", &id, &seats);
+
+            int index = findFlight(bookings, id);
+
+            if (index == -1)
+                cout << "Cannot perform this operation: flight " << id << " not found" << endl;
+            else if (!bookings[index].cancelReservations(seats))
+                cout << "Cannot perform this operation" << endl;
+        }
+    }
+
+    return 0;
+}
