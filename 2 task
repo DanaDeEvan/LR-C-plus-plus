@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+#include <map>
+
+using namespace std;
+
+int main() {
+    string values;
+    getline(cin, values);
+
+    string templ;
+    getline(cin, templ);
+
+    map<string, string> data;
+
+    int start = 0;
+
+    while (start < values.length()) {
+        int comma = values.find(',', start);
+
+        if (comma == string::npos)
+            comma = values.length();
+
+        string pair = values.substr(start, comma - start);
+
+        int eq = pair.find('=');
+
+        string key = pair.substr(0, eq);
+        string value = pair.substr(eq + 1);
+
+        data[key] = value;
+
+        start = comma + 1;
+    }
+
+    string result;
+
+    for (int i = 0; i < templ.length(); i++) {
+        if (templ[i] == '[') {
+            int end = templ.find(']', i);
+
+            if (end != string::npos) {
+                string key = templ.substr(i + 1, end - i - 1);
+
+                if (data.count(key))
+                    result += data[key];
+                else
+                    result += "[" + key + "]";
+
+                i = end;
+            }
+            else {
+                result += templ[i];
+            }
+        }
+        else {
+            result += templ[i];
+        }
+    }
+
+    cout << result << endl;
+
+    return 0;
+}
